@@ -12,6 +12,22 @@ public class SQLDatabaseEngine extends DatabaseEngine {
 	@Override
 	String search(String text) throws Exception {
 		//Write your code here
+		String result = null;
+		Connection connection = getConnection();
+		PreparedStatement stmt = connection.prepareStatement(
+				"SELECT response FROM reply WHERE keyword = ?");
+		stmt.setString(1, text);
+		ResultSet rs = stmt.executeQuery();
+		
+		while (rs.next()) {
+			return rs.getString(1);			
+		}
+				
+		rs.close();
+		stmt.close();
+		connection.close();
+		
+		
 		return null;
 	}
 	
