@@ -20,16 +20,15 @@ public class SQLDatabaseEngine extends DatabaseEngine {
 		ResultSet rs = stmt.executeQuery();
 		
 		while (rs.next()) {
-			result = rs.getString(1);			
+			return rs.getString(1);			
 		}
 				
 		rs.close();
 		stmt.close();
 		connection.close();
 		
-		if(result != null)
-			return text;
-		throw new Exception ("NOT FOUND");
+		
+		return null;
 	}
 	
 	
