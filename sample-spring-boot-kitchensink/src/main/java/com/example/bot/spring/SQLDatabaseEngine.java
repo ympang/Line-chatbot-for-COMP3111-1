@@ -12,7 +12,9 @@ public class SQLDatabaseEngine extends DatabaseEngine {
 	@Override
 	String search(String text) throws Exception {
 		//Write your code here
+		
 		String result = null;
+		try {
 		Connection connection = getConnection();
 		PreparedStatement stmt = connection.prepareStatement(
 				"SELECT response FROM reply WHERE keyword = ?");
@@ -26,7 +28,9 @@ public class SQLDatabaseEngine extends DatabaseEngine {
 		rs.close();
 		stmt.close();
 		connection.close();
-		
+		}catch(Exception e) {
+			log.info( e.toString());
+		}
 		if(result != null)
 			return result;
 		
